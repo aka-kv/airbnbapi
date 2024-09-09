@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 app = FastAPI()
-
+cookie_header = 'bev=1725781971_EAOGI3MDVhM2JmZj; everest_cookie=1725781971.EAOWNhNmFjYjljZDZiOD.0iDc2JP8BckiSSH-xLksNOReL0F-52qlq3P0EfpnlM0; _ccv=cban^%^3A0_183215^%^3D1^%^2C0_200000^%^3D1^%^2C0_183345^%^3D1^%^2C0_183243^%^3D1^%^2C0_183216^%^3D1^%^2C0_179751^%^3D1^%^2C0_200003^%^3D1^%^2C0_200005^%^3D1^%^2C0_179754^%^3D1^%^2C0_179750^%^3D1^%^2C0_179737^%^3D1^%^2C0_179744^%^3D1^%^2C0_179739^%^3D1^%^2C0_179743^%^3D1^%^2C0_179749^%^3D1^%^2C0_200012^%^3D1^%^2C0_200011^%^3D1^%^2C0_183217^%^3D1^%^2C0_183219^%^3D1^%^2C0_183096^%^3D1^%^2C0_179747^%^3D1^%^2C0_179740^%^3D1^%^2C0_179752^%^3D1^%^2C0_183241^%^3D1^%^2C0_200007^%^3D1^%^2C0_183346^%^3D1^%^2C0_183095^%^3D1^%^2C0_210000^%^3D1^%^2C0_210001^%^3D1^%^2C0_210002^%^3D1^%^2C0_210003^%^3D1^%^2C0_210004^%^3D1^%^2C0_210010^%^3D1; cdn_exp_0752821c603ff621a=control; _ga=GA1.1.206914813.1725781979; FPID=FPID2.3.vm8Lbi^%^2Fs8om4l2T1H2fhKRXI1AQDzJXBZlNlSxeDSUM^%^3D.1725781979; FPAU=1.3.941013262.1725781978; tzo=330; FPLC=9Ve9PJVrHjAv^%^2BfEHzGrSv3HQl5UDtZVlfw^%^2ByVnRZhvEDXnk323EjFOlMC^%^2F4eDHUAQwt4jLY8kzwZPt6Pwu00nkejLP6mHj19q80tfPr3ZArBCCf7^%^2FGBA5LUOTckF5g^%^3D^%^3D; previousTab=^%^7B^%^22id^%^22^%^3A^%^229216da1b-45c8-4616-89bf-e5ead1399bfc^%^22^%^7D; cfrmfctr=DESKTOP; cbkp=4; frmfctr=wide; jitney_client_session_id=4654a1c8-f0d0-4aaa-b54c-24ec7fe60902; jitney_client_session_created_at=1725920431.761; jitney_client_session_id=c0e06d7e-cd31-4b26-af17-c8bc282902fa; jitney_client_session_created_at=1725920432; _user_attributes=^%^7B^%^22device_profiling_session_id^%^22^%^3A^%^221725781971--64fba74834477f2558be66b2^%^22^%^2C^%^22giftcard_profiling_session_id^%^22^%^3A^%^221725920461--093b6e52fb5389b3bc1d9f95^%^22^%^2C^%^22reservation_profiling_session_id^%^22^%^3A^%^221725920461--eff03e7c4cf8f974748093b6^%^22^%^2C^%^22curr^%^22^%^3A^%^22INR^%^22^%^7D; ak_bmsc=EF8F47EA0F2F72723FB490192FB04555~000000000000000000000000000000~YAAQHkPHF8GXjtSRAQAA9H372BmoUYsQgxub8sLVKa5HPndbLnqde02fGI3MyAXyGZ8RNsyYxnO03SMYHujO/pbiuC4ERI/chnOUgtnc8YyS+2WFBgb85HJgNEVHQka0r9Ak3PPmQ6ftCuV+tdRP3/Spv8irjXCV3aJy3f+voiUS3ieAzOLSLImFLZ+RPNVXkNNowXnxJppZ3kwIIeJEAsc9IjDEM/OxC2/0Pxpxwm+q9K6YNLE7VUDNzwbaVQfiI+yuHSyJXPnSqBA2EcSed1oqtlB3SlMvewUVdjcW+l6KUOusJy62y5lvt0GlIfiiOQHV92J2REhPLBpU7wVTMKBr58KN53WqGrFlICDi/RmfGOmMP+xAp9+JrStp0U8Zv/6liXFLj8g39EsysQ==; OptanonConsent=0_179750^%^3A1^%^2C0_183095^%^3A1^%^2C0_183241^%^3A1^%^2C0_179754^%^3A1^%^2C0_183346^%^3A1^%^2C0_200000^%^3A1^%^2C0_210000^%^3A1^%^2C0_210010^%^3A1^%^2C0_183215^%^3A1^%^2C0_210004^%^3A1^%^2C0_179737^%^3A1^%^2C0_179752^%^3A1^%^2C0_179751^%^3A1^%^2C0_179749^%^3A1^%^2C0_200007^%^3A1^%^2C0_210001^%^3A1^%^2C0_200005^%^3A1^%^2C0_179740^%^3A1^%^2C0_179743^%^3A1^%^2C0_179744^%^3A1^%^2C0_183243^%^3A1^%^2C0_183096^%^3A1^%^2C0_179747^%^3A1^%^2C0_183216^%^3A1^%^2C0_200012^%^3A1^%^2C0_183219^%^3A1^%^2C0_200003^%^3A1^%^2C0_179739^%^3A1^%^2C0_210002^%^3A1^%^2C0_183217^%^3A1^%^2C0_183345^%^3A1^%^2C0_210003^%^3A1^%^2C0_200011^%^3A1; _cci=cban^%^3Aac-28f25430-e7c9-4796-8b49-786ef64fd880; jitney_client_session_updated_at=1725922353.559; jitney_client_session_updated_at=1725922353; _ga_2P6Q8PGG16=GS1.1.1725920432.10.1.1725922353.44.0.0; previousTab=^%^7B^%^22id^%^22^%^3A^%^22add794bc-8db0-49e2-b3ca-f9eb86c84b6d^%^22^%^7D; bm_sv=62097FE92ED80BF3D528A533CFD4C1F9~YAAQHkPHF/6kjtSRAQAAXZ4M2RlleqQTgqqRDEX0i+qOixaL8HD8lZktRIUWw1FqhcZhCLHWNrtSIghNtWY/hbycU7EM/aZKEtd/rdeb5S8bfA7KYf7fCmp3w305sy3RU9t4UGnBwEM/Yq9GRpBzXDoPGRxqEvl90K8tAsKuNEhaKvOxGC5KMYiIByMqmcQSFeJR/bnYd/3ulq4Hh+XoTrs+Ejvm0iDYTjkf5coFAEXE7w1dx7+Kc9npxcbrmWsH6+Tm~1^'
 class AirbnbResponse(BaseModel):
     highest_price: str
     lowest_price: str
@@ -40,6 +40,7 @@ def fetch_json_from_airbnb(curl_url):
         "x-airbnb-graphql-platform": "web",
         "x-airbnb-graphql-platform-client": "minimalist-niobe",
         "x-airbnb-supports-airlock-v2": "true",
+        "cookie":cookie_header
     }
 
     response = requests.get(curl_url, headers=headers)
@@ -130,7 +131,8 @@ def fetch_airbnb_occupancy_data(listing_id):
         "x-client-version": "c57d413b447fe3c7f2051773628446fe3b65c436",
         "x-csrf-token": "",
         "x-csrf-without-token": "1",
-        "x-niobe-short-circuited": "true"
+        "x-niobe-short-circuited": "true",
+        "cookie": cookie_header
     }
 
     try:
