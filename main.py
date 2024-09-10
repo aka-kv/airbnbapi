@@ -170,9 +170,9 @@ def calculate_occupancy_rate(data):
 
     # Calculate the availability rate as the percentage of available days
     if total_days_count > 0:
-        availability_rate = (available_days_count / total_days_count) * 100
+        availability_rate = 100 - ((available_days_count / total_days_count) * 100)
     else:
-        availability_rate = 0
+        availability_rate = 100
     return availability_rate
 
 @app.get("/airbnb/{listing_id}", response_model=AirbnbResponse)
@@ -211,5 +211,5 @@ async def get_airbnb_data(listing_id: str):
         highest_price=highest_price,
         lowest_price=lowest_price,
         average_nightly_price=average_price,
-        availability_rate=f"{availability_rate:.2f}%" if isinstance(availability_rate, float) else availability_rate
+        occupancy_rate=f"{availability_rate:.2f}%" if isinstance(availability_rate, float) else availability_rate
     )
