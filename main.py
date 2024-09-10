@@ -211,5 +211,5 @@ async def get_airbnb_data(listing_id: str):
         highest_price=highest_price,
         lowest_price=lowest_price,
         average_nightly_price=average_price,
-        occupancy_rate=f"{availability_rate:.2f}%" if isinstance(availability_rate, float) else availability_rate
+        availability_rate=f"{availability_rate:.2f}%" if isinstance(availability_rate, float) else availability_rate
     )
